@@ -67,6 +67,18 @@
 
 		],
     },
+    {
+    'target_name': 'webinos_wrt',
+    'type': 'none',
+    'toolsets': ['host'],
+    'copies': [
+      {
+        'files': [
+          'build/Release/nativedevicestatus.node',
+        ],
+        'destination': 'node_modules/',
+      }],
+    }, # end webinos_wrt
   ] # end targets
 }
 
