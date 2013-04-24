@@ -1,0 +1,6 @@
+{
+  "name": "devicestatus",
+  "params": {
+    "devicetype": "laptop"
+  }
+}
