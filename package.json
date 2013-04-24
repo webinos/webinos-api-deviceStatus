@@ -1,5 +1,5 @@
 { "_comment": "The Device Status Uses the http://wacapps.net as the attribute value in the Policy.xml File"
-,"name": "devicestatus"
+,"name": "webinos-api-devicestatus"
 , "publishConfig": { "tag": "alpha" }
 , "description": "DeviceStatus API"
 , "keywords": [ "webinos", "device", "status", "API"]
@@ -27,4 +27,7 @@
 , "bundleDependencies":
   [
   ]
+, "scripts":{
+  "install":"node-gyp configure build"
+}
 }
