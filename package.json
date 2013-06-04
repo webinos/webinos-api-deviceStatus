@@ -1,8 +1,8 @@
 { "_comment": "The Device Status Uses the http://wacapps.net as the attribute value in the Policy.xml File"
-,"name": "webinos-api-devicestatus"
+,"name": "webinos-api-deviceStatus"
 , "publishConfig": { "tag": "alpha" }
 , "description": "DeviceStatus API"
-, "keywords": [ "webinos", "device", "status", "API"]
+, "keywords": [ "webinos", "device", "Status", "API"]
 , "version": "0.7.1"
 , "homepage": "http://webinos.org/"
 , "bugs" : "http://jira.webinos.org"
