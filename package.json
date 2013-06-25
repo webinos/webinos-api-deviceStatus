@@ -19,12 +19,12 @@
                  , "src": "./src"
                  }
 , "main": "./lib/webinos.rpc.devicestatus.js"
-, "dependencies":
-   { "find-dependencies" : "0.0.x"
-  , "inherits" : "1.0.0"
-  , "mkdirp" : "0.3.x"
+, "dependencies":{
   }
-, "bundleDependencies":
+,"devDependencies": {
+    "webinos-jsonrpc2": "*"
+  },
+ "bundleDependencies":
   [
   ]
 , "scripts":{
