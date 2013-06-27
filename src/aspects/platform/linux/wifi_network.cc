@@ -25,8 +25,6 @@ vector<string> WiFiNetwork::getComponents()
         return components;
 }
 
-
-
 bool WiFiNetwork::isSupported(string * property)
 {
 	return true;
