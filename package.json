@@ -1,4 +1,4 @@
-{ "_comment": "The Device Status Uses the http://wacapps.net as the attribute value in the Policy.xml File"
+{ "_comment": "The Device Status Uses the http://webinos.org as the attribute value in the Policy.xml File"
 ,"name": "webinos-api-deviceStatus"
 , "publishConfig": { "tag": "alpha" }
 , "description": "DeviceStatus API"
@@ -9,7 +9,7 @@
 , "author": "Salvatore Monteleone <salvatore.monteleone@dieei.unict.it>, Krishna Bangalore <krishna.bangalore@in.tum.de>"
 , "repository":
   { "type": "git"
-  , "url": "http://github.com/webinos/Webinos-Platform"
+  , "url": "http://github.com/webinos/webinos-api-deviceStatus.git"
   }
 , "bugs":
   { "email": "webinos-wp4-ml@fokus.fraunhofer.de"
@@ -22,12 +22,18 @@
 , "dependencies":{
   }
 ,"devDependencies": {
-    "webinos-jsonrpc2": "*"
+    "webinos-jsonrpc2": "*",
+    "zombie": "~2.0.0-alpha15",
+    "jasmine-node": "x.x.x"
   },
  "bundleDependencies":
   [
-  ]
+  ],
+  "engines": {
+    "node": ">= 0.6.0"
+  }
 , "scripts":{
-  "install":"node-gyp configure build"
+  "install":"node-gyp configure build",
+  "travis-api-test": "./test/tools/travis-test.sh"
 }
 }
