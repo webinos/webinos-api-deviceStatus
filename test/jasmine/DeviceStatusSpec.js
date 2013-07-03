@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * Copyright 2012 TU München 
  ******************************************************************************/
 
 describe("DeviceStatus API", function() {
 	var devicestatusService;
 
-	webinos.discovery.findServices(new ServiceType("http://wacapps.net/api/devicestatus"), {
+	webinos.discovery.findServices(new ServiceType("http://webinos.org/api/devicestatus"), {
 		onFound: function (service) {
 			devicestatusService = service;
 		}
@@ -98,6 +99,7 @@ describe("DeviceStatus API", function() {
 			});
 		});
 
+                // Test for Battery  
 		it("can retrieve the _default component of a supported aspect (eg. Battery)", function() {
 			var components;
 
@@ -198,7 +200,142 @@ describe("DeviceStatus API", function() {
 				expect(typeof(propertyValue)).toEqual("string");
 			});
 		});
+               //---- Battery Ends here----
+               
+               //-----Test for CPU Starts here---- 
+		it("can retrieve the _default component of a supported aspect (eg. CPU)", function() {
+			var components;
 
+			devicestatusService.getComponents("CPU", function(c) {
+				components = c;
+			});
+
+			waitsFor(function() {
+				return components;
+			}, "getComponents failed", 500);
+
+			runs(function() {
+				expect(components).toContain("_default");
+			});
+		});
+
+		it("doesn't retrieve components for not supported aspects", function() {
+			var components;
+
+			devicestatusService.getComponents("A not supported aspect", function(c) {
+				components = c;
+			});
+
+			waitsFor(function() {
+				return components;
+			}, "getComponents failed", 500);
+
+			runs(function() {
+				expect(components.length).not.toBeDefined();
+			});
+		});
+
+		it("let the user know if an aspect is supported", function() {
+			var isAspectSupported;
+
+			devicestatusService.isSupported("CPU", null, function(ret) {
+				isAspectSupported = ret.isSupported;
+			});
+
+			waitsFor(function() {
+				return isAspectSupported;
+			}, "isSupported failed", 500);
+
+			runs(function() {
+				expect(typeof(isAspectSupported)).toEqual("boolean");
+			});
+		});
+
+		it("let the user know if an aspect's property is supported", function() {
+			var isPropertySupported;
+
+			devicestatusService.isSupported("CPU", "model", function(ret) {
+				isPropertySupported = ret.isSupported;
+			});
+
+			waitsFor(function() {
+				return isPropertySupported;
+			}, "isSupported failed", 500);
+
+			runs(function() {
+				expect(typeof(isPropertySupported)).toEqual("boolean");
+			});
+		});
+
+		it("can retrieve the value for a supported property", function() {
+			var propertyValue;
+
+			var prop = {component:"_default", aspect:"CPU", property:"model"};
+			successCB = function (value) { propertyValue = value };
+			devicestatusService.getPropertyValue(successCB, null, prop);
+
+			waitsFor(function() {
+				return propertyValue;
+			}, "getPropertyValue failed", 500);
+
+			runs(function() {
+				expect(typeof(propertyValue)).toEqual("string");
+			});
+		});
+
+                it("let the user know if an aspect's property is supported", function() {
+			var isPropertySupported;
+
+			devicestatusService.isSupported("CPU", "currentLoad", function(ret) {
+				isPropertySupported = ret.isSupported;
+			});
+
+			waitsFor(function() {
+				return isPropertySupported;
+			}, "isSupported failed", 500);
+
+			runs(function() {
+				expect(typeof(isPropertySupported)).toEqual("boolean");
+			});
+		});
+
+		it("can retrieve the value for a supported property", function() {
+			var propertyValue;
+
+			var prop = {component:"_default", aspect:"CPU", property:"currentLoad"};
+			successCB = function (value) { propertyValue = value };
+			devicestatusService.getPropertyValue(successCB, null, prop);
+
+			waitsFor(function() {
+				return propertyValue;
+			}, "getPropertyValue failed", 500);
+
+			runs(function() {
+				expect(typeof(propertyValue)).toEqual("string");
+			});
+		});
+
+		/*it("can add/remove a watcher to monitor properties changes", function() {
+			var propertyValue;
+			var watchId;
+
+			var prop = {component:"_default", aspect:"CPU", property:"currentLoad"};
+			successCB = function (value, ref) {
+				propertyValue = value;
+				devicestatusService.clearPropertyChange(watchId);
+			};
+
+			watchId = devicestatusService.watchPropertyChange(successCB, null, prop);
+
+			waitsFor(function() {
+				return propertyValue;
+			}, "watchPropertyChange failed", 5000);
+
+			runs(function() {
+				expect(typeof(propertyValue)).toEqual("string");
+			});
+		});*/
+               //---- CPU Ends here----
 	});
 
 });

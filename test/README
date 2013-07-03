@@ -1,4 +1,4 @@
 Authors: Salvatore Monteleone, Krishna Bangalore
 To Run the Test from the Command Line, Go to the Path of the Test Folder 
-For Example: Webinos-Platform/webinos/core/api/devicestatus/test 
+For Example: webinos-api-deviceStatus/test 
 To view the Output, Run: node test_devicestatus.js
