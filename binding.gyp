@@ -74,7 +74,7 @@
     'copies': [
       {
         'files': [
-          'build/Release/nativedevicestatus.node',
+          '<(PRODUCT_DIR)/nativedevicestatus.node',
         ],
         'destination': 'node_modules/',
       }],
