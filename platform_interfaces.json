@@ -1,0 +1,5 @@
+{
+  "android": {
+    "DevicestatusImpl": "org.webinos.android.impl.DevicestatusImpl"
+  }
+}
