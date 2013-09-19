@@ -57,15 +57,22 @@ string Battery::batteryLevel(string batteryName)
 {
 	string line, tmp;
 	int lastFullCapacity, remainingCapacity;
+    vector<string> components;
 
 	if (batteryName[0] == '_')
-		batteryName = getComponents()[2];
+		components = getComponents();
+
+    if (components.size() < 3)
+        return "N/A";
+
+    batteryName = components[2];
 
 	string batteryInfoFile(BATTERY_BASE_DIR + batteryName + "/info");
 	string batteryStateFile(BATTERY_BASE_DIR + batteryName + "/state");
 	char* res = new char[7];
 
 	ifstream info(batteryInfoFile.c_str());
+    if(info.fail()) return "N/A";
 
 	while(getline(info, line))
 	{
@@ -78,6 +85,7 @@ string Battery::batteryLevel(string batteryName)
 	}
 
 	ifstream state(batteryStateFile.c_str());
+    if(state.fail()) return "N/A";
 
 	while(getline(state, line))
 	{
@@ -98,15 +106,21 @@ string Battery::batteryBeingCharged(string batteryName)
 {
 	string line, tmp;
 	string chargingState;
+    vector<string> components;
 
 	if (batteryName[0] == '_')
-		batteryName = getComponents()[2];
+		components = getComponents();
+
+    if (components.size() < 3) return "N/A";
+
+    batteryName = components[2];
 
 	string batteryStateFile(BATTERY_BASE_DIR + batteryName + "/state");
 
 	ifstream state(batteryStateFile.c_str());
-
-	while(getline(state, line))
+    if(state.fail()) return "N/A";
+	
+    while(getline(state, line))
 	{
 		if (line.find("charging state") != string::npos)
 		{
