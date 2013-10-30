@@ -1,6 +1,5 @@
 {
   "name": "webinos-api-deviceStatus",
   "params": {
-    "devicetype": "laptop"
   }
 }
