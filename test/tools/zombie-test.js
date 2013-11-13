@@ -25,11 +25,7 @@ Browser.debug = false;
 
 browser = new Browser()
 
-//var apiName = "webinos-api-deviceStatus";
-//var pathToHtml = "../jasmine/SpecRunner.html";
-//var totalPath = "file:///" + __dirname + "/" + pathToHtml;
-
-var totalPath = "file://" + process.argv[2];
+var totalPath = "http://localhost:8080/webinos-api-deviceStatus/test/web_root/jasmine/SpecRunner.html";
 
 console.log("Visiting: " + totalPath);
 
