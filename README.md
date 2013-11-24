@@ -1,53 +1,69 @@
-Code Snippet
-The getComponents() method provides means to get the components of an aspect.
-               param params is an array for the components.
-               param successCallback Success callback.
-               
- RemoteDeviceStatusManager.prototype.getComponents = 
-                function (params, successCallback) {
-                        devicestatusmodule.devicestatus.getComponents(
-                                params[0],
-                                function (components) {
-                                        successCallback(components);
-                                }
-                        );
-                };
+# webinos device status API #
 
-The isSupported() method checks if an aspect is supported and, optionally, if a property that would correspond to a component of that aspect is supported (e.g., a Battery aspect's batteryLevel property). Check for the device type, if we support it via config check the native implementation to return a Success Callback.
-RemoteDeviceStatusManager.prototype.isSupported = 
-                function (params, successCallback) {
-                        if (params && params.length == 2 && params[0] == "Device" && params[1] == "type") 
-                                successCallback({ aspect:params[0], property:params[1],isSupported:true});
-                        else 
-                                devicestatusmodule.devicestatus.isSupported(
-                                        params[0],
-                                        params[1],
-                                        function (res) {
-                                                successCallback(res);
-                                        }
-                                );
-                };
+**Service Type**: http://webinos.org/api/devicestatus
 
-The getPropertyValue() method asyncrhonously attemps to read the value of a given component. However, if no component is given, the user agent will default to the active component or the default component of a given aspect. Check for the device type, if we support it via config check the native implementation to return a Success Callback.
-RemoteDeviceStatusManager.prototype.getPropertyValue = 
-                function (params, successCallback, errorCallback) {
-                        if (params && params[0] && params[0].aspect == "Device" && params[0].property == "type"){ 
-                try
-                {
-                    var Pzp = require(require("path").join(require.main.paths[0], "..", "lib", "pzp_sessionHandling.js"));
-                    successCallback(Pzp.getInstance().getMetaData("deviceType") || "Undefined");
-                } catch(err){
-                    successCallback("Undefined");
-                }
-                        }else 
-                                devicestatusmodule.devicestatus.getPropertyValue(
-                                        function (prop) {
-                                                successCallback(prop);
-                                        },
-                                        function (err) {
-                                                errorCallback(err);
-                                        },
-                                        params[0]
-                                );
-                };
+The main concept of device status API is to !TODO!
+
+
+## Installation ##
+
+To install the device status API you will need to npm the node module inside the webinos pzp.
+
+For end users, you can simply open a command prompt in the root of your webinos-pzp and do: 
+
+	npm install https://github.com/webinos/webinos-api-deviceStatus.git
+
+For developers that want to tweak the API, you should fork this repository and clone your fork inside the node_module of your pzp.
+
+	cd node_modules
+	git clone https://github.com/<your GitHub account>/webinos-api-deviceStatus.git
+	cd webinos-api-deviceStatus
+	npm install
+
+
+## Getting a reference to the service ##
+
+To discover the service you will have to search for the "http://webinos.org/api/devicestatus" type. Example:
+
+	var serviceType = "http://webinos.org/api/devicestatus";
+	webinos.discovery.findServices( new ServiceType(serviceType), 
+		{ 
+			onFound: serviceFoundFn, 
+			onError: handleErrorFn
+		}
+	);
+	function serviceFoundFn(service){
+		// Do something with the service
+	};
+	function handleErrorFn(error){
+		// Notify user
+		console.log(error.message);
+	}
+
+Alternatively you can use the webinos dashboard to allow the user choose the device status API to use. Example:
+ 	
+	webinos.dashboard.open({
+         module:'explorer',
+	     data:{
+         	service:[
+            	'http://webinos.org/api/devicestatus'
+         	],
+            select:"services"
+         }
+     }).onAction(function successFn(data){
+		  if (data.result.length > 0){
+			// User selected some services
+		  }
+	 });
+
+## Methods ##
+
+Once you have a reference to an instance of a service you can use the following methods:
+
+
+
+## Links ##
+
+- [Specifications](http://dev.webinos.org/specifications/api/devicestatus.html)
+- [Examples](https://github.com/webinos/webinos-api-deviceStatus/wiki/Examples)
 
