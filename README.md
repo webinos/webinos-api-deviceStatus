@@ -60,6 +60,17 @@ Alternatively you can use the webinos dashboard to allow the user choose the dev
 
 Once you have a reference to an instance of a service you can use the following methods:
 
+###getComponents (aspect, successCallback, errorCallback)
+
+The getComponents() method provides means to get the components of an aspect.
+
+###isSupported (aspect, property, successCallback)
+
+The isSupported() method checks if an aspect is supported and, optionally, if a property that would correspond to a component of that aspect is supported (e.g., a Battery aspect's batteryLevel property).
+
+###getPropertyValue (successCallback, errorCallback, prop)
+
+The getPropertyValue() method asyncrhonously attemps to read the value of a given component. However, if no component is given, the user agent will default to the active component or the default component of a given aspect.
 
 
 ## Links ##
