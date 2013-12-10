@@ -2,11 +2,14 @@
 	var PropertyValueSuccessCallback, ErrorCallback, DeviceAPIError, PropertyRef;
 
 	DeviceStatusManager = function (obj) {
-		this.base = WebinosService;
-		this.base(obj);
+		WebinosService.call(this, obj);
 	};
 	
-	DeviceStatusManager.prototype = new WebinosService;
+	DeviceStatusManager.prototype = Object.create(WebinosService.prototype);
+	// The following allows the 'instanceof' to work properly
+	DeviceStatusManager.prototype.constructor = DeviceStatusManager;
+	// Register in the service discovery
+	_webinos.registerServiceConstructor("http://webinos.org/api/devicestatus", DeviceStatusManager);
 
 	DeviceStatusManager.prototype.bindService = function (bindCB, serviceId) {
 		// actually there should be an auth check here or whatever, but we just always bind
