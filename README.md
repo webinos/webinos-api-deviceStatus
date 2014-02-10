@@ -2,7 +2,7 @@
 
 **Service Type**: http://webinos.org/api/devicestatus
 
-The main concept of device status API is to !TODO!
+The main concept of device status API is to provide information about various "aspects" of a device. For a complete list of supported "aspects" please refer to [the specifications](http://dev.webinos.org/specifications/api/devicestatus.html#::PropQuery).
 
 
 ## Installation ##
